@@ -1,6 +1,8 @@
 # star_fizzle
 A simple non-deterministic cellular automata with remarkable properties
 
+![orion](./images/orion.png)
+
 ### How to use the script
 
 1. Install [Rust](https://www.rust-lang.org/) if you have not.
