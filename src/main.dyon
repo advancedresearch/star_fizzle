@@ -1,0 +1,81 @@
+/// The highest value that converges to stable state.
+stable() = 0.533127630536856459
+/// How fast to transition state of cell.
+trans() = 0.4
+/// The magic frequency.
+freq() = 0.77
+/// Whether to ignore paths to and from same neighbour.
+ignore_equal() = true
+/// Whether to display a 2x2 tile
+tile() = false
+
+fn main() {
+    n := 100
+    s := if tile() {2} else {4}
+    ws := [[stable(); n]; n]
+    cur := (0, 0)
+    loop {
+        if !next_event() {break}
+        if render() {
+            ~ draw_list := []
+            clear(color: #333333)
+            k := if tile() {2} else {1}
+            for x k, y k {
+                for i, j {
+                    rectangle(
+                        color: (1, 1, 1) * ws[i][j] * 3 + (0, 0, 0, 1),
+                        corner: (x, y) * n * s + (i, j) * s,
+                        size: (s, s)
+                    )
+                }
+            }
+            draw(draw_list)
+        }
+        if update() {
+            upd(mut ws)
+
+            if all i, j {ws[i][j] > stable()} {
+                ws = [[stable(); n]; n]
+            }
+        }
+        if mouse_cursor() {
+            cur = unwrap(mouse_cursor_pos())
+        }
+        if press() {
+            k := 4
+            cur := cur - (10, 10)
+            for i k, j k {
+                x := (i+x(cur)/s)%n
+                y := (j+y(cur)/s)%n
+                ws[x][y] = stable() + 0.001
+            }
+        }
+    }
+}
+
+/// Updates weights.
+fn upd(mut ws: [[f64]]) {
+    n := len(ws)
+    trans := trans()
+    freq := freq()
+    choices := [(0, 0); 4]
+    nws := clone(ws)
+    a := (0, 0)
+    b := (0, 0)
+    wa := 0
+    wb := 0
+    for i, j {
+        choices[0] = ((i, j) + (1, 0)) % n
+        choices[1] = ((i, j) + (0, 1)) % n
+        choices[2] = ((i, j) + (n - 1, 0)) % n
+        choices[3] = ((i, j) + (0, n - 1)) % n
+        a = choices[random() * len(choices)]
+        b = choices[random() * len(choices)]
+        if ignore_equal() && (a == b) {continue}
+        wa = ws[x(a)][y(a)]
+        wb = ws[x(b)][y(b)]
+        nws[i][j] += trans * ((wa + wb) / 2 - sin(ws[i][j] * freq * tau()))
+    }
+
+    for i, j {ws[i][j] = clone(nws[i][j])}
+}
