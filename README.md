@@ -21,6 +21,12 @@ A common used setting is `trans = 0.4` and `freq = 0.77`.
 
 `dyongame src/main.dyon`
 
+Adds stars using the mouse (point-and-click).
+
+- If the star is too big, a super-nova will be created that consumes the entire map
+- The map is automatically reset after a supernova
+- You can cancel supernovas (or stars) by clicking on them
+
 ### Properties
 
 The stability is very sensitive depending on `trans` and `freq`.
