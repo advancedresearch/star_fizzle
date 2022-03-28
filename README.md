@@ -1,7 +1,7 @@
 # star_fizzle
 A simple non-deterministic cellular automata with remarkable properties
 
-![orion](./images/orion.png)
+<img src="./images/orion.png" width="200" />
 
 ### How to use the script
 
