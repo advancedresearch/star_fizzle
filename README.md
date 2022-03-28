@@ -3,6 +3,8 @@ A simple non-deterministic cellular automata with remarkable properties
 
 <img src="./images/orion.png" width="200" />
 
+<img src="./images/edge-001.png" width="200" />
+
 General formula:
 
 `nws[i][j] += trans * ((wa + wb) / 2 - sin(ws[i][j] * freq * tau()))`
