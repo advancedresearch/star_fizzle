@@ -10,6 +10,8 @@ ignore_equal() = true
 tile() = false
 
 fn main() {
+    set_window(title: "Star Fizzle")
+
     n := 100
     s := if tile() {2} else {4}
     ws := [[stable(); n]; n]
