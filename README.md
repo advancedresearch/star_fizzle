@@ -9,6 +9,8 @@ General formula:
 
 `nws[i][j] += trans * ((wa + wb) / 2 - sin(ws[i][j] * freq * tau()))`
 
+The variables `wa` and `wb` are randomly chosen neighbour cells.
+
 A common used setting is `trans = 0.4` and `freq = 0.77`.
 
 ### How to use the script
