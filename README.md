@@ -1,8 +1,10 @@
 # Star Fizzle
 A simple non-deterministic cellular automata with remarkable properties
 
+`ignore_equal() = true, tile() = false`  
 <img src="./images/orion.png" width="200" />
 
+`ignore_equal() = false, tile() = true`  
 <img src="./images/edge-001.png" width="200" />
 
 General formula:
